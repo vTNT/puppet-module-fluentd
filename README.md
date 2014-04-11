@@ -7,7 +7,8 @@ first,install puppet-concat module: puppet module install puppetlabs-concat
 ## Usage
 
 ### create source file
-``` include "td_agent"
+``` 
+    include "td_agent"
     include concat::setup
 
     tdgent::configfile { 'syslog': }
