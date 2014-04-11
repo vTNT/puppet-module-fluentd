@@ -1,0 +1,32 @@
+<match <%= @pattern %>>
+  type <%= @type %>
+<% @config.each_pair do |key, val| -%>
+  <%= key %> <%= val %>
+<% end -%>
+  send_timeout 10s 
+  recover_wait 5s
+  heartbeat_interval 1s
+  phi_threshold 8
+  hard_timeout 10s
+
+<% servers.each do |server| -%>
+  <server>
+    name collector
+<% server.each_pair do |key, val| -%>
+    <%= key %> <%= val %>
+<% end -%>
+    weight 60
+  </server>
+<% end -%>
+
+  # Failed
+  <secondary>
+    type file
+    path /var/log/td-agent/forware-failed
+  </secondary>
+
+  # Buffer Parameters                                                                                                                
+  buffer_type memory
+  flush_interval 3s
+
+</match>
