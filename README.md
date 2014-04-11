@@ -2,7 +2,9 @@
 
 manage fluent and install fluent-plugin by puppet
 
-first,install puppet-concat module: puppet module install puppetlabs-concat
+puppet-concat module: puppet module install puppetlabs-concat
+
+os: CentOS 6.x
       
 ## Usage
 
