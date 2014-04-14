@@ -13,7 +13,7 @@ define td_agent::configfile {
         group => 'root',
         mode => '0644',
         require => Package['td-agent'],
-    #    notify => Exec["reload_td_agent"],
+  #      notify => Exec["reload_td_agent"],
     }
 }
 
