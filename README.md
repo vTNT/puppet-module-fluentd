@@ -42,9 +42,23 @@ os: CentOS 6.x
     }
 ```
 
-### install fluentd-plugin
+### create forward file (open forward port)
+```
+    include "td_agent"
+    include concat::setup
+
+    td_agent::configfile { 'forward': }
+    td_agent::forward { 'forward_main': 
+        configfile => 'forward',
+        type => 'forward',
+        servers => [
+            {'bind' => '192.168.10.202', 'port' => '24224'}
+        ],
+    }
 ```
 
+### install fluentd-plugin
+```
     include "td_agent"
     include concat::setup
     td_agent::install_plugin {['fluent-plugin-mysqlslowquery','fluent-plugin-tail-multiline']:}

@@ -1,0 +1,8 @@
+<source>
+  type <%= @type %>
+<% servers.each do |server| -%>
+<% server.each_pair do |key, val| -%>
+  <%= key %> <%= val %>
+<% end -%>
+<% end -%>
+</source>
