@@ -12,7 +12,7 @@ class td_agent::install {
         require => file["td"],
     }
 
-   # file {"td_libyaml":
+   # file {"td-libyaml":
    #     ensure => present,
    #     owner => 'root',
    #     group => 'root',
@@ -21,28 +21,28 @@ class td_agent::install {
    #     source => 'puppet:///modules/td_agent/td-libyaml-0.1.4-1.x86_64.rpm',                                              
    # }
   
-   # package {"td_libyaml":
+   # package {"td-libyaml":
    #     ensure  => present,
    #     provider => rpm,
    #     source   => "/tmp/td-libyaml-0.1.4-1.x86_64.rpm",
-   #     require => File["td_libyaml"],
+   #     require => File["td-libyaml"],
    # }
 
-   # file {"td_agent":
+   # file {"td-agent":
    #     ensure => present,
    #     owner => 'root',
    #     group => 'root',
    #     mode => '0644',
    #     path => '/tmp/td-agent-1.1.19-0.x86_64.rpm',
    #     source => 'puppet:///modules/td_agent/td-agent-1.1.19-0.x86_64.rpm',
-   #     require => Package["td_libyaml"],                                              
+   #     require => Package["td-libyaml"],                                              
    # }
   
-   # package {"td_agent":
+   # package {"td-agent":
    #     ensure  => present,
    #     provider => rpm,
    #     source   => "/tmp/td-agent-1.1.19-0.x86_64.rpm",
-   #     require => File["td_libyaml"],
+   #     require => File["td-agent"],
    # }
 
     file {'td-agent':
@@ -52,6 +52,7 @@ class td_agent::install {
         mode    => '0755',
         path    => '/etc/init.d/td-agent',
         source  => 'puppet:///modules/td_agent/td-agent',
+        require => Package["td-agent"],
     }
 
     file {'config':
