@@ -1,8 +1,5 @@
 <match <%= @pattern %>>
   type <%= @type %>
-<% @config.each_pair do |key, val| -%>
-  <%= key %> <%= val %>
-<% end -%>
   send_timeout 10s 
   recover_wait 5s
   heartbeat_interval 1s

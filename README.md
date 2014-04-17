@@ -34,7 +34,7 @@ os: CentOS 6.x
     td_agent::configfile { 'forward': }
     td_agent::match { 'forward_main': 
         configfile => 'forward',
-        pattern => 'mongo.*.*',
+        pattern => 'es.audit.*',
         type => 'forward',
         servers => [
             {'host' => '192.168.10.202', 'port' => '24224'}
@@ -64,3 +64,17 @@ os: CentOS 6.x
     td_agent::install_plugin {['fluent-plugin-mysqlslowquery','fluent-plugin-tail-multiline']:}
 ```
 
+### input data into es
+```
+    td_agent::configfile { 'es_audit': }
+     td_agent::es{ 'audit_main':
+         configfile => 'es_audit',
+         pattern => 'es.audit.*',
+         type_name => 'audit',
+         servers => [
+       {'host' => 'fluent.server.com', 'port' => '9200'}
+     ],
+   }
+ 
+     td_agent::install_plugin {['fluent-plugin-elasticsearch']:}
+```

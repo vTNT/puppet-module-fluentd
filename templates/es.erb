@@ -1,0 +1,20 @@
+<match <%= @pattern %>>
+  index_name <%= @type_name %>
+  type_name <%= @type_name %>
+  type elasticsearch
+  include_tag_key true
+  tag_key @log_name
+<% servers.each do |server| -%>
+<% server.each_pair do |key, val| -%>
+  <%= key %> <%= val %>
+<% end -%>
+<% end -%>
+  logstash_format true
+  logstash_prefix <%= @type_name %>
+  flush_interval 5s
+  buffer_type file
+  buffer_path /var/log/td-agent/buffer/es
+  buffer_chunk_limit 100m
+  buffer_queue_limit 500
+  retry_wait 10s
+</match>
